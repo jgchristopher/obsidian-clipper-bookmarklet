@@ -28,6 +28,7 @@
         "test/**/*"
     ],
     "devDependencies": {
+        "@types/turndown": "^5.0.1",
         "bookmarklet": "^3.0.0",
         "extension-cli": "latest",
         "turndown": "^7.1.1"
