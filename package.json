@@ -11,7 +11,11 @@
     "scripts": {
         "start": "xt-build -e dev -w",
         "start:firefox": "xt-build -e dev -p firefox -w",
-        "build": "xt-build -e prod",
+        "build:tsc": "tsc",
+        "build:xt": "xt-build -e prod",
+        "build:bookmarklet": "./node_modules/.bin/bookmarklet dist/background.js dist/obsidian-clipper.min.js",
+        "build:copyclipboard": "pbcopy < dist/obsidian-clipper.min.js",
+        "build": "npm run build:tsc && npm run build:xt && npm run build:bookmarklet && npm run build:copyclipboard",
         "build:firefox": "xt-build -e prod -p firefox",
         "clean": "xt-clean",
         "docs": "xt-docs",
