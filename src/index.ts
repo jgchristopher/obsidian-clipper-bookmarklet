@@ -20,7 +20,6 @@ import TurndownService from 'turndown';
     let dateString = '';
 
     function padLeftZero(value: string): string {
-      console.log(value)
       let arr = value.split('');
       return (arr[1] ? value : "0" + arr[0])
     }
@@ -53,13 +52,15 @@ import TurndownService from 'turndown';
     let data = encodeURIComponent(content);
     let header = encodeURIComponent(heading);
     let url: string;
+
     if (useAdvancedUri) {
       // This requires the advanced-uri plugin to be installed
       url = `obsidian://advanced-uri?vault=${vault}&daily=true&heading=${header}&data=${data}&mode=prepend`;
     } else {
       // This uses the built in obsidian url support
-      url = `obsidian://new?file=${encodeURIComponent(daily_notes + convertDate(new Date()))}&content=${encodeURIComponent(content)}&append=true&vault=${vaultName}`;
+      url = `obsidian://new?file=${encodeURIComponent(daily_notes + convertDate(new Date()))}&content=${data}&append=true&vault=${vaultName}`;
     }
+
     document.location.href = url;
   }
 
