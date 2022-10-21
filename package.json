@@ -52,5 +52,8 @@
                 "src": "./src/**/*.js"
             }
         ]
+    },
+    "dependencies": {
+        "joplin-turndown-plugin-gfm": "^1.0.12"
     }
 }
