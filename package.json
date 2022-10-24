@@ -34,7 +34,7 @@
     "devDependencies": {
         "@types/turndown": "^5.0.1",
         "bookmarklet": "^3.0.0",
-        "extension-cli": "latest",
+        "extension-cli": "^1.2.2",
         "turndown": "^7.1.1"
     },
     "xtdocs": {
