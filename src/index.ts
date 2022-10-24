@@ -1,5 +1,5 @@
 import TurndownService from 'turndown';
-
+import { MarkdownTables } from './tables';
 (() => {
 
   const useAdvancedUri = true;
@@ -15,6 +15,8 @@ import TurndownService from 'turndown';
     codeBlockStyle: 'fenced',
     emDelimiter: '*',
   });
+  let tables = new MarkdownTables();
+  markdownService.use(tables.tables)
 
   function convertDate(date: Date): string {
     let dateString = '';
