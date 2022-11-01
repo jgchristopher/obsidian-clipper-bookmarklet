@@ -1,7 +1,6 @@
-import TurndownService from 'turndown';
-import { MarkdownTables } from './tables';
+import TurndownService from "turndown";
+import { MarkdownTables } from "./tables";
 (() => {
-
   const useAdvancedUri = true;
   const vaultName = encodeURIComponent("Personal");
   const daily_notes = "daily_notes/";
@@ -9,21 +8,21 @@ import { MarkdownTables } from './tables';
   const tags = "#bookmark-clipper";
 
   const markdownService = new TurndownService({
-    headingStyle: 'atx',
-    hr: '---',
-    bulletListMarker: '-',
-    codeBlockStyle: 'fenced',
-    emDelimiter: '*',
+    headingStyle: "atx",
+    hr: "---",
+    bulletListMarker: "-",
+    codeBlockStyle: "fenced",
+    emDelimiter: "*",
   });
   let tables = new MarkdownTables();
-  markdownService.use(tables.tables)
+  markdownService.use(tables.tables);
 
   function convertDate(date: Date): string {
-    let dateString = '';
+    let dateString = "";
 
     function padLeftZero(value: string): string {
-      let arr = value.split('');
-      return (arr[1] ? value : "0" + arr[0])
+      let arr = value.split("");
+      return arr[1] ? value : "0" + arr[0];
     }
 
     if (date) {
@@ -50,22 +49,34 @@ import { MarkdownTables } from './tables';
     return html;
   }
 
-  function sendToObsidian(content: string, heading: string, vault: string): void {
+  function sendToObsidian(
+    content: string,
+    heading: string,
+    vault: string
+  ): void {
     let data = encodeURIComponent(content);
     let header = encodeURIComponent(heading);
     let url: string;
 
     if (useAdvancedUri) {
       // This requires the advanced-uri plugin to be installed
-      url = `obsidian://advanced-uri?vault=${vault}&daily=true&heading=${header}&data=${data}&mode=prepend`;
+      url = `obsidian://advanced-uri?vault=${encodeURIComponent(
+        vault
+      )}&daily=true&heading=${encodeURIComponent(
+        header
+      )}&data=${encodeURIComponent(data)}&mode=prepend`;
     } else {
       // This uses the built in obsidian url support
-      url = `obsidian://new?file=${encodeURIComponent(daily_notes + convertDate(new Date()))}&content=${data}&append=true&vault=${vaultName}`;
+      url = `obsidian://new?file=${encodeURIComponent(
+        daily_notes + convertDate(new Date())
+      )}&content=${data}&append=true&vault=${vaultName}`;
     }
 
     document.location.href = url;
   }
 
-  const content = `- [${document.title}](${document.URL}) ${tags}\n${markdownService.turndown(getSelectionHtml())}\n\n---\n\n`;
+  const content = `- [${document.title}](${
+    document.URL
+  }) ${tags}\n${markdownService.turndown(getSelectionHtml())}\n\n---\n\n`;
   sendToObsidian(content, heading, vaultName);
 })();
