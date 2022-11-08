@@ -75,8 +75,8 @@ import { MarkdownTables } from "./tables";
     document.location.href = url;
   }
 
-  const content = `- [${document.title}](${
+  const content = `- [ ] [${document.title}](${
     document.URL
-  }) ${tags}\n${markdownService.turndown(getSelectionHtml())}\n\n---\n\n`;
+  }) ${tags}\n${markdownService.turndown(getSelectionHtml())}\n---\n\n`;
   sendToObsidian(content, heading, vaultName);
 })();
