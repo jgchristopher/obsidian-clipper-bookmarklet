@@ -11,6 +11,13 @@ import { MarkdownTables } from "./tables";
   });
   let tables = new MarkdownTables();
   markdownService.use(tables.tables);
+  markdownService.addRule("heading_1_to_2", {
+    filter: ["h1"],
+    replacement: function (content) {
+      console.log("Moving H1 to H2 Markdown");
+      return `## ${content}`;
+    },
+  });
 
   function getSelectionHtml(): string {
     let html = "";
